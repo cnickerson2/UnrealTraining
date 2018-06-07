@@ -1,3 +1,5 @@
+#pragma once
+
 #include "FBullCowGame.h"
 #include <locale>
 #include <map>
@@ -12,6 +14,13 @@ FBullCowGame::FBullCowGame()
     Reset();
 }
 
+//************************************
+// Method:    GetGuessLimit
+// FullName:  FBullCowGame::GetGuessLimit
+// Access:    public 
+// Returns:   int32
+// Qualifier: const
+//************************************
 int32 FBullCowGame::GetGuessLimit() const
 {
     return MyGuessLimit;

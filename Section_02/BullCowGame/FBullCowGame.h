@@ -29,9 +29,9 @@ public:
     int32 GetHiddenWordLength() const;
 
     bool IsGameWon() const;
-    EGuessStatus IsGuessValid(const FString&) const; // TODO: Make a more rich return
+    EGuessStatus IsGuessValid(const FString&) const;
 
-    void Reset(); // TODO: Make a more Rich Return Value;
+    void Reset();
     // Provide a method for counting bulls and cows and increasing try number. Assumes Valid Guess
     FBullCowCount SubmitValidGuess(const FString&);
 

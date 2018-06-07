@@ -3,6 +3,7 @@
     This acts as the view in a MVC pattern, and is responsible for all user
     interaction. For gameLogic, see the FBullCowGame class.
 */
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -16,8 +17,8 @@ using int32 = int;
 void PrintIntro();
 void PlayGame();
 void GetGuess(FText&);
-bool CheckValidityOfGuess(FText&);
-void PrintBullCowCount(FBullCowCount&);
+bool CheckValidityOfGuess(const FText&);
+void PrintBullCowCount(const FBullCowCount&);
 bool IsPlayAgain();
 bool AskToPlayAgain(FText&);
 void PrintGameSummary();
@@ -89,7 +90,7 @@ void PlayGame()
     PrintGameSummary();
 }
 
-void GetGuess(FText& Guess) // Dereference Guess
+void GetGuess(FText& Guess)
 {
     do 
     {
@@ -104,7 +105,7 @@ void GetGuess(FText& Guess) // Dereference Guess
 
 }
 
-bool CheckValidityOfGuess(FText& Guess)
+bool CheckValidityOfGuess(const FText& Guess)
 {
     EGuessStatus Status = BCGame.IsGuessValid(Guess);
 
@@ -127,7 +128,7 @@ bool CheckValidityOfGuess(FText& Guess)
     }
 }
 
-void PrintBullCowCount(FBullCowCount& BullCowCount)
+void PrintBullCowCount(const FBullCowCount& BullCowCount)
 {
     std::cout << "Bulls: " << BullCowCount.Bulls << ". Cows: " << BullCowCount.Cows << std::endl;
 }
