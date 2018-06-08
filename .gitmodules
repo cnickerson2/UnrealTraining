@@ -1,0 +1,3 @@
+[submodule "InstructorFiles"]
+	path = InstructorFiles
+	url = https://github.com/UnrealCourse/03_BuildingEscape.git
