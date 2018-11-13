@@ -23,8 +23,9 @@ private:
 
     UInputComponent* InputComponent = nullptr;
 
+
     void Grab();
-    void ReleaseGrab();
+    void Release();
 
 public:	
 	// Sets default values for this component's properties
@@ -34,17 +35,19 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+    // Look for attached input component
     void FindInputComponent();
 
+    // Look for attached physics handle
     void FindPhysicsHandleComponent();
 
-    // return hit for first physics body in reach
+    // Get the first target that is hit by the linetrace
     FHitResult GetFirstPhysicsBodyInReach() const;
+
+    // Look for attached input component
+    FTwoVectors GetLineTracePoints() const;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
-	
 };
