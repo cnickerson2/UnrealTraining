@@ -112,6 +112,10 @@ void UGrabber::Grab()
     /// If we hit something then attach a physics handle
     if (ActorHit)
     {
+        if (!PhysicsHandle)
+        {
+            return;
+        }
         PhysicsHandle->GrabComponentAtLocationWithRotation(
             ComponentToGrab, 
             NAME_None, // No Bones since it's static
@@ -123,5 +127,9 @@ void UGrabber::Grab()
 
 void UGrabber::Release()
 {
+    if (!PhysicsHandle)
+    {
+        return;
+    }
     PhysicsHandle->ReleaseComponent();
 }
