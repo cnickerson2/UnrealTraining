@@ -13,7 +13,15 @@
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
+
+private:
+    UPROPERTY(EditAnywhere)
+    float CrosshairXLocation = 0.5f;
+    UPROPERTY(EditAnywhere)
+    float CrosshairYLocation = 0.333333f;
+
+    
 	
 public:
 
@@ -27,4 +35,5 @@ private:
     void AimTowardsCrosshair();
     
     ATank* GetControlledTank() const;
+    bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 };
