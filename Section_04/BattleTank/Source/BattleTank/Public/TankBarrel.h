@@ -6,10 +6,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankBarrel.generated.h"
 
-/**
- * 
- */
-UCLASS()
+// Holds Barrel's Properties and Elevate Methods
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hideCategories = (Collision))
 class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
@@ -17,5 +15,13 @@ class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 public:
 
     void Elevate(float DegreesPerSecond);
-	
+
+private:
+
+    UPROPERTY(EditAnywhere, Category = Setup)
+        float MaxDegreesPerSecond = 20.0f; 
+    UPROPERTY(EditAnywhere, Category = Setup)
+        float MinElevationInDegress = 0.0f; 
+    UPROPERTY(EditAnywhere, Category = Setup)
+        float MaxElevationInDegrees = 40.0f;
 };
