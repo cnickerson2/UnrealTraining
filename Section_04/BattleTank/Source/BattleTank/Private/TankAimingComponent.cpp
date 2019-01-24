@@ -3,6 +3,7 @@
 
 #include "TankAimingComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "TankBarrel.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -15,10 +16,12 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
     Barrel = BarrelToSet;
 }
+
+
 
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
@@ -70,6 +73,6 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
     auto DeltaRotator = AimAsRotator - BarrelRotator;
 
     // Set the Barrel to the rotation determined above
-    
+    Barrel->Elevate(5); // TODO Remove Magic Number
 }
 
