@@ -27,7 +27,15 @@ protected:
 
     UTankAimingComponent* TankAimingComponent = nullptr;
 
+    UPROPERTY(EditAnywhere, Category = Firing)
+    float LaunchSpeed = 100000; // TODO: Find Sensible Starting Value
+
 public:
 
     void AimAt(FVector HitLocation);
+    
+    UFUNCTION(BlueprintCallable, Category = Setup)
+    void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+
 };
