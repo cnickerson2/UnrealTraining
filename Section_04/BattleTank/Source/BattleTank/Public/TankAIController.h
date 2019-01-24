@@ -19,9 +19,12 @@ public:
 
     virtual void BeginPlay() override;
 
-private:
+protected:
     ATank* GetAITank() const;
 
     ATank* GetPlayerTank() const;
-	
+    
+    virtual void Tick(float DeltaTime) override;
+
+    virtual void AimAtPlayer();
 };

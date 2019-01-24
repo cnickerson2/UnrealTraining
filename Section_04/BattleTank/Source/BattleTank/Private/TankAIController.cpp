@@ -4,7 +4,12 @@
 
 ATank* ATankAIController::GetAITank() const
 {
-    return Cast<ATank>(GetPawn());
+    auto ThisTank = Cast<ATank>(GetPawn());
+    if(!ThisTank)
+    {
+        UE_LOG(LogTemp, Error, TEXT("There is no tank object attached to %s"), *GetName());
+    }
+    return ThisTank;
 }
 
 ATank* ATankAIController::GetPlayerTank() const
@@ -13,34 +18,30 @@ ATank* ATankAIController::GetPlayerTank() const
 
     if(!PlayerPawn)
     {
+        UE_LOG(LogTemp, Error, TEXT("There is no pawn attached to the First Player Controller"));
         return nullptr;
     }
 
     return Cast<ATank>(PlayerPawn);
 }
 
+void ATankAIController::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+
+    AimAtPlayer();
+}
+
+void ATankAIController::AimAtPlayer()
+{
+    if(GetAITank() && GetPlayerTank())
+    {
+        GetAITank()->AimAt(GetPlayerTank()->GetActorLocation());
+    }
+}
+
 void ATankAIController::BeginPlay()
 {
     Super::BeginPlay();
 
-    //ATank* AITank = GetAITank();
-    //if (!AITank)
-    //{
-    //    UE_LOG(LogTemp, Warning, TEXT("No Tank is currently being Controlled by AI"))
-    //}
-    //else
-    //{
-    //    UE_LOG(LogTemp, Warning, TEXT("AI Tank Object: %s"), *AITank->GetName())
-    //}
-
-    ATank* PlayerTank = GetPlayerTank();
-
-    if(!PlayerTank)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("No Player Tank was found"))
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Player Tank Object Found: %s"), *PlayerTank->GetName())
-    }
 }
