@@ -61,11 +61,7 @@ void ATankPlayerController::BeginPlay()
     ATank* ControlledTank = GetControlledTank();
     if (!ControlledTank)
     {
-        UE_LOG(LogTemp, Warning, TEXT("No Tank is currently being Controlled"));
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Controlled Tank Object: %s"), *ControlledTank->GetName());
+        UE_LOG(LogTemp, Error, TEXT("No Tank is currently being Controlled"));
     }
 
 }
