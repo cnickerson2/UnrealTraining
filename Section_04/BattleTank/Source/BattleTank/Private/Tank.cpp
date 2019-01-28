@@ -15,6 +15,7 @@ ATank::ATank()
     // Force the Tank to have an Aiming Component in BPs
     // No need to protect pointers as added at construction
     TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+
 }
 
 // Called when the game starts or when spawned
@@ -51,16 +52,17 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 
 void ATank::Fire()
 {
-    UE_LOG(LogTemp, Warning, TEXT("%f: Firing"), GetWorld()->GetTimeSeconds());
 
     if (!Barrel) { return; }
 
 
     // Spawn a projectile at the barrel location
-    GetWorld()->SpawnActor<AProjectile>(
+    auto Projectile = GetWorld()->SpawnActor<AProjectile>(
         ProjectileBlueprint,
         Barrel->GetSocketLocation(FName("Projectile")),
         Barrel->GetSocketRotation(FName("Projectile"))
         );
+
+    Projectile->LaunchProjectile(LaunchSpeed);
 }
 
