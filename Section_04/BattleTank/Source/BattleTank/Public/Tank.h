@@ -9,6 +9,7 @@
 class UTankBarrel; // Forward Declaration
 class UTankTurret;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -26,6 +27,8 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
     UTankAimingComponent* TankAimingComponent = nullptr;
+    UPROPERTY(BlueprintReadOnly)
+    UTankMovementComponent* TankMovementComponent = nullptr;
 
     double LastFireTime = 0;
 
