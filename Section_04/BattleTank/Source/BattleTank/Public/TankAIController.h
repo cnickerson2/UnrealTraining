@@ -18,4 +18,7 @@ class BATTLETANK_API ATankAIController : public AAIController
 protected:
     
     virtual void Tick(float DeltaTime) override;
+
+    UPROPERTY(EditDefaultsOnly)
+    float AcceptanceRadius = 3000; // TODO Check Radius is in CM
 };

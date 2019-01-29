@@ -13,8 +13,10 @@ void ATankAIController::Tick(float DeltaTime)
 
     if (PlayerTank && ThisAITank)
     {
+        MoveToActor(PlayerTank, AcceptanceRadius);
+
         ThisAITank->AimAt(PlayerTank->GetActorLocation());
 
-        ThisAITank->Fire(); // TODO: Don't fire every frame
+        ThisAITank->Fire();
     }
 }
