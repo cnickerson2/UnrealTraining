@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Centre For Innovative Media
 
 #pragma once
 
@@ -21,12 +21,13 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Input")
     void IntendTurnRight(float Throw);
 
-    virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
-
-    UFUNCTION(BlueprintCallable, Category = Setup)
+    UFUNCTION(BlueprintCallable, Category = "Setup")
     void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
 private:
     UTankTrack* LeftTrack = nullptr;
     UTankTrack* RightTrack = nullptr;
+
+protected:
+    virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 };

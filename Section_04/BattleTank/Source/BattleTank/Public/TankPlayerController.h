@@ -38,10 +38,13 @@ private:
 
     // Start the tank moving the barrel so that a shot would hit where the crosshair intersects the world
     void AimTowardsCrosshair();
-    
-    ATank* GetControlledTank() const;
+
     bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
     bool GetLookDirection(const FVector2D& ScreenLocation, FVector& LookDirection) const;
     bool GetLookVectorHitLocation(const FVector& LookDirection, FVector& HitLocation) const;
+
+protected:
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    ATank* GetControlledTank() const;
 };
