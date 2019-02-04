@@ -17,42 +17,19 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
+void UTankAimingComponent::Initialize(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet)
 {
-    if(!BarrelToSet)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Barrel has not been set in BP"));
-        return;
-    }
-    Barrel = BarrelToSet;
-}
+    if (!(TurretToSet && BarrelToSet)) { return; }
 
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
-    if (!TurretToSet)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Turret has not been set in BP"));
-        return;
-    }
     Turret = TurretToSet;
-}
-
-
-
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-    Super::BeginPlay();
-
-    // ...
-
+    Barrel = BarrelToSet;
 }
 
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-    if (!Barrel || !Turret) { return; }
-
+    if (!ensure(Barrel && Turret)) {  return; }
+    
     FVector OutLaunchVelocity(0);
     FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 
@@ -81,6 +58,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
+    if (!ensure(Barrel && Turret)) { return; }
+
     auto AimAsRotator = AimDirection.Rotation();
 
     // Get the Rotation of the Aiming Vector
