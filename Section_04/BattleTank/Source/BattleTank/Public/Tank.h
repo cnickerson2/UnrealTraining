@@ -9,7 +9,6 @@
 class UTankBarrel; // Forward Declaration
 class UTankTurret;
 class UTankAimingComponent;
-class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -21,10 +20,9 @@ protected:
     // Sets default values for this pawn's properties
     ATank();
 
+    virtual void BeginPlay() override;
     UPROPERTY(BlueprintReadOnly)
     UTankAimingComponent* TankAimingComponent = nullptr;
-    UPROPERTY(BlueprintReadOnly)
-    UTankMovementComponent* TankMovementComponent = nullptr;
 
     double LastFireTime = 0;
 
