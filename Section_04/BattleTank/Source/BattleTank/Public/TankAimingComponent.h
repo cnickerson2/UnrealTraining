@@ -35,8 +35,9 @@ protected:
     EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
 
-public:	
-    virtual void AimAt(FVector HitLocation, float LaunchSpeed);
+public:
+    virtual void AimAt(FVector HitLocation);
+    virtual void Fire();
 		
 private:
     // Sets default values for this component's properties
@@ -45,4 +46,7 @@ private:
     UTankBarrel* Barrel = nullptr;
     UTankTurret* Turret = nullptr;
     void MoveBarrel(FVector AimDirection);
+
+    UPROPERTY(EditDefaultsOnly, Category = Firing)
+    float LaunchSpeed = 4000;
 };
