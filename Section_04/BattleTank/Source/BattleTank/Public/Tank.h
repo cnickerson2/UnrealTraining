@@ -16,6 +16,4 @@ protected:
     // Sets default values for this pawn's properties
     ATank();
 
-    virtual void BeginPlay() override;
-
 };
