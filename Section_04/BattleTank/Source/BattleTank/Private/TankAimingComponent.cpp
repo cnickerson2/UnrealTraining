@@ -12,7 +12,7 @@ UTankAimingComponent::UTankAimingComponent()
 {
     // Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
     // off to improve performance if you don't need them.
-    PrimaryComponentTick.bCanEverTick = false;
+    PrimaryComponentTick.bCanEverTick = true;
 
     // ...
 }
@@ -53,7 +53,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
         ESuggestProjVelocityTraceOption::DoNotTrace)
     )
     {
-        auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+        AimDirection = OutLaunchVelocity.GetSafeNormal();
         MoveBarrel(AimDirection);
     }
     else
@@ -103,14 +103,29 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-    if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds)
+    if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
     {
         FiringStatus = EFiringStatus::Reloading;
+    }
+    else if(IsBarrelMoving())
+    {
+        FiringStatus = EFiringStatus::Aiming;
+    }
+    else
+    {
+        FiringStatus = EFiringStatus::Locked;
     }
 }
 
 void UTankAimingComponent::SetProjectileBlueprint(TSubclassOf<AProjectile> ProjectileBluePrintToSet)
 {
     ProjectileBlueprint = ProjectileBluePrintToSet;
+}
+
+bool UTankAimingComponent::IsBarrelMoving()
+{
+    if (!ensure(Barrel)) { return false; }
+    // If they are equal, the barrel is not moving
+    return !AimDirection.Equals(Barrel->GetForwardVector(), 0.01f);
 }
 
