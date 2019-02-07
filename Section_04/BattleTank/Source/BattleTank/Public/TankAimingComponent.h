@@ -45,6 +45,7 @@ private:
     // Sets default values for this component's properties
     UTankAimingComponent();
 
+    void BeginPlay() override;
     UTankBarrel* Barrel = nullptr;
     UTankTurret* Turret = nullptr;
     void MoveBarrel(FVector AimDirection);
@@ -60,4 +61,8 @@ private:
     UPROPERTY(EditDefaultsOnly, Category = Setup)
     TSubclassOf<AProjectile> ProjectileBlueprint; // Alternative is to use TSubclassOf<T>
 
+    virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+    
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    void SetProjectileBlueprint(TSubclassOf<AProjectile> ProjectileBluePrintToSet);
 };

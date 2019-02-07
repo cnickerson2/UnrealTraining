@@ -17,6 +17,12 @@ UTankAimingComponent::UTankAimingComponent()
     // ...
 }
 
+void UTankAimingComponent::BeginPlay()
+{
+    Super::BeginPlay();
+    // So first fire is after initial reload
+    LastFireTime = FPlatformTime::Seconds();
+}
 
 void UTankAimingComponent::Initialize(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet)
 {
@@ -59,18 +65,21 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 
 void UTankAimingComponent::Fire()
 {
-    bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-    if (ensure(Barrel) && ensure(ProjectileBlueprint) && isReloaded)
-    {
-        // Spawn a projectile at the barrel location
-        auto Projectile = GetWorld()->SpawnActor<AProjectile>(
-            ProjectileBlueprint,
-            Barrel->GetSocketLocation(FName("Projectile")),
-            Barrel->GetSocketRotation(FName("Projectile"))
-            );
 
-        Projectile->LaunchProjectile(LaunchSpeed);
-        LastFireTime = FPlatformTime::Seconds();
+    if(FiringStatus != EFiringStatus::Reloading)
+    {
+        if (ensure(Barrel) && ensure(ProjectileBlueprint))
+        {
+            // Spawn a projectile at the barrel location
+            auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+                ProjectileBlueprint,
+                Barrel->GetSocketLocation(FName("Projectile")),
+                Barrel->GetSocketRotation(FName("Projectile"))
+                );
+
+            Projectile->LaunchProjectile(LaunchSpeed);
+            LastFireTime = FPlatformTime::Seconds();
+        }
     }
 }
 
@@ -89,5 +98,19 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
     // Set the Barrel to the rotation determined above
     Barrel->Elevate(DeltaBarrelRotator.Pitch);
     Turret->Rotate(DeltaTurretRotator.Yaw);
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
+{
+    Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds)
+    {
+        FiringStatus = EFiringStatus::Reloading;
+    }
+}
+
+void UTankAimingComponent::SetProjectileBlueprint(TSubclassOf<AProjectile> ProjectileBluePrintToSet)
+{
+    ProjectileBlueprint = ProjectileBluePrintToSet;
 }
 
