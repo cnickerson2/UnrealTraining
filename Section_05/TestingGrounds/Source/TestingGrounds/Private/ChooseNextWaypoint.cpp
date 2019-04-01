@@ -2,16 +2,32 @@
 
 #include "ChooseNextWaypoint.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "AIController.h"
+#include "PatrollingGuard.h" // TODO Remove Coupling
 
 EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
     Super::ExecuteTask(OwnerComp, NodeMemory);
 
+    // Get The Patrol Points
+    auto AIController = OwnerComp.GetAIOwner();
+    auto ControlledPawn = AIController->GetPawn();
+    auto PatrollingGuard = Cast<APatrollingGuard>(ControlledPawn);
+    auto PatrolPoints = PatrollingGuard->PatrolPointsCPP;
+
+    // TODO: Protect against empty patrol routes
+
+    // Set the Next Waypoint
     auto BlackboardComp = OwnerComp.GetBlackboardComponent();
-
     auto Index = BlackboardComp->GetValueAsInt(IndexKey.SelectedKeyName);
+    BlackboardComp->SetValueAsObject(WaypointKey.SelectedKeyName, PatrolPoints[Index]);
 
-    UE_LOG(LogTemp, Warning, TEXT("Waypoint Index: %i"), Index);
+    // Cycle the Index
+
+    auto NextIndex = (Index + 1) % PatrolPoints.Num();
+    BlackboardComp->SetValueAsInt(IndexKey.SelectedKeyName, NextIndex);
+
+
 
     return EBTNodeResult::Succeeded;
 }
