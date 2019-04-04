@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{57AEFC6D-AA76-410A-98F5-F3F4862B606E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{5C59EC37-A2BB-46DD-B3BE-5B1196E23A42}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{55AADE87-CEFC-45F5-8572-7D82F9D169F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{8A26E7E7-3CC8-420B-BDA0-37C03C12FA71}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{B3C5ABD8-4E7E-4C5B-9C54-5D55BCBEDD68}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestingGrounds", "Intermediate\ProjectFiles\TestingGrounds.vcxproj", "{2D6D2C6F-0667-4E6B-B7DE-DA01EC0BA40C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{8A46ADE1-B0D4-449D-9DC4-223EDF5DA129}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{A3539174-1077-4940-9EF5-F1FCE2172125}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = C:\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
+		C:\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis = C:\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
 EndProject
 Global
@@ -99,7 +99,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B3C5ABD8-4E7E-4C5B-9C54-5D55BCBEDD68} = {57AEFC6D-AA76-410A-98F5-F3F4862B606E}
-		{2D6D2C6F-0667-4E6B-B7DE-DA01EC0BA40C} = {55AADE87-CEFC-45F5-8572-7D82F9D169F5}
+		{B3C5ABD8-4E7E-4C5B-9C54-5D55BCBEDD68} = {5C59EC37-A2BB-46DD-B3BE-5B1196E23A42}
+		{2D6D2C6F-0667-4E6B-B7DE-DA01EC0BA40C} = {8A26E7E7-3CC8-420B-BDA0-37C03C12FA71}
 	EndGlobalSection
 EndGlobal
