@@ -30,12 +30,13 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+    virtual void UnPossessed() override;
+
     UPROPERTY(EditDefaultsOnly, Category = "Setup")
     TSubclassOf<AGun> GunBlueprint;
 
     UFUNCTION(BlueprintCallable, Category = "Weapon")
-    void PullTrigger();
-
+    void PullTrigger();    
 private:
     // First Person Mesh
     UPROPERTY(VisibleDefaultsOnly, Category = "Mesh")
