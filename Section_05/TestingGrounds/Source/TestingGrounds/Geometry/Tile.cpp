@@ -2,6 +2,8 @@
 
 
 #include "Tile.h"
+#include "DrawDebugHelpers.h"
+#include "WorldCollision.h"
 
 // Sets default values
 ATile::ATile()
@@ -15,6 +17,7 @@ ATile::ATile()
 void ATile::BeginPlay()
 {
 	Super::BeginPlay();
+    CastSphere(GetActorLocation(), 300);
 	
 }
 
@@ -44,4 +47,21 @@ AActor* ATile::SpawnActorAtLocation(FVector SpawnPoint, TSubclassOf<AActor> Acto
     SpawnedActor->SetActorRelativeLocation(SpawnPoint);
     SpawnedActor->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative,false));
     return SpawnedActor;
+}
+
+bool ATile::CastSphere(FVector Location, float Radius)
+{
+    FHitResult HitResult;
+    bool HasHit = GetWorld()->SweepSingleByChannel(
+        HitResult,
+        Location,
+        Location,
+        FQuat::Identity,
+        ECollisionChannel::ECC_GameTraceChannel2,
+        FCollisionShape::MakeSphere(Radius)
+    );
+    FColor ResultColor = HasHit ? FColor::Red : FColor::Green;
+    UE_LOG(LogTemp, Warning, TEXT("Has hit? %i. HitResult: %s"), HasHit, *HitResult.ToString());
+    DrawDebugSphere(GetWorld(), Location, Radius, 100, ResultColor, true, 100);
+    return HasHit;
 }
