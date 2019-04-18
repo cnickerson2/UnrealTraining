@@ -66,7 +66,6 @@ bool ATile::FindEmptyLocation(FVector& SpawnPoint, float Radius)
             bFoundEmptyLocation = true;
         }
     }
-    UE_LOG(LogTemp, Warning, TEXT("Found Empty Location? %i"), bFoundEmptyLocation);
     return bFoundEmptyLocation;
 }
 
