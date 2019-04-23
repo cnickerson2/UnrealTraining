@@ -13,21 +13,15 @@ class TESTINGGROUNDS_API UGrassComponent : public UHierarchicalInstancedStaticMe
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
-    UGrassComponent();
 
     UPROPERTY(EditDefaultsOnly, Category = "Spawning")
-    FBox SpawningExtents;
+    FBox SpawningExtents = FBox(FVector(0,-2000,0),FVector(4000,2000,0));
     UPROPERTY(EditDefaultsOnly, Category = "Spawning")
-    int SpawnCount;
+    int SpawnCount = 3000;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
     void SpawnGrass();
