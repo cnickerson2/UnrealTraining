@@ -62,6 +62,9 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Spawning")
     void PlaceActors(TSubclassOf<AActor> ToSpawn, FSpawningAttributes SpawningAttributes);
 
+    UFUNCTION(BlueprintCallable, Category = "Spawning")
+    void PlaceAIPawns(TSubclassOf<APawn> ToSpawn, FSpawningAttributes SpawningAttributes);
+
     TArray<FSpawnPosition> GetRandomSpawnPositions(FSpawningAttributes SpawningAttributes);
 
     UFUNCTION(BlueprintCallable, Category = "Pool")
