@@ -64,16 +64,18 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "Spawning")
     void PlaceAIPawns(TSubclassOf<APawn> ToSpawn, FSpawningAttributes SpawningAttributes);
-
-    TArray<FSpawnPosition> GetRandomSpawnPositions(FSpawningAttributes SpawningAttributes);
-
+    
     UFUNCTION(BlueprintCallable, Category = "Pool")
     void SetPool(UActorPool* Pool);
 
 
 private:
     
-    AActor* PlaceActor(TSubclassOf<AActor> ActorToSpawn, const FSpawnPosition& SpawnPosition);
+    template<class T>
+    void RandomlyPlaceActors(TSubclassOf<T> ToSpawn, FSpawningAttributes SpawningAttributes);
+
+    void PlaceActor(TSubclassOf<AActor> ActorToSpawn, const FSpawnPosition& SpawnPosition);
+    void PlaceActor(TSubclassOf<APawn> ActorToSpawn, const FSpawnPosition& SpawnPosition);
     
     bool FindEmptyLocation(FVector& SpawnPoint, float Radius);
 

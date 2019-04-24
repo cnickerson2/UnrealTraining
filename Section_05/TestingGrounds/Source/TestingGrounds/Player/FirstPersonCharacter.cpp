@@ -82,7 +82,7 @@ void AFirstPersonCharacter::BeginPlay()
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
     if(!ensure(GunBlueprint))
     {
-        UE_LOG(LogTemp, Warning, TEXT("Gun Blueprint is null on First Person Character"));
+        UE_LOG(LogTemp, Error, TEXT("Gun Blueprint is null on First Person Character"));
         return;
     }
     
